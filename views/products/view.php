@@ -1,5 +1,6 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -34,5 +35,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
         ],
     ]) ?>
+<div class="row">
+    <p>
+        <?= Html::a('Add Material', ['recipes/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProviderRecipe,
+        'filterModel' => $searchModelRecipe,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
+            ['label' => 'Materials','filter' => false,'attribute'=>'materials_id','value'=>function($data){ return \app\models\Materials::getByID($data->materials_id)->name; }],
+            'quantity',
+            ['label' => 'Unit','filter' => false,'attribute'=>'unit_id','value'=>function($data){ return \app\models\Units::getByID($data->unit_id)->name; }],
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+</div>
 </div>

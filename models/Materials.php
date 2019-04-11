@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%materials}}".
@@ -76,5 +77,18 @@ class Materials extends \yii\db\ActiveRecord
     public function getUnit()
     {
         return $this->hasOne(Units::className(), ['id' => 'unit_id']);
+    }
+
+
+    public static function getList()
+    {
+        return ArrayHelper::map( self::find()->all(),'id','name');
+    }
+    public static function getByID($id=null){
+        if(!$id){
+            return false;
+        }
+
+        return self::findOne($id);
     }
 }

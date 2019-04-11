@@ -4,31 +4,17 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "{{%products}}".
+ * This is the model class for table "{{%recipes}}".
  *
  * @property int $id
- * @property string $product_name
+ * @property string $name
  * @property int $updated_at
  * @property int $created_at
  */
-class Products extends \yii\db\ActiveRecord
+class Recipes extends \yii\db\ActiveRecord
 {
-
-    public static function getList()
-    {
-        return ArrayHelper::map( self::find()->all(),'id','product_name');
-    }
-    public static function getByID($id=null){
-        if(!$id){
-            return false;
-        }
-
-        return self::findOne($id);
-    }
-
     /**
      * @inheritdoc
      */
@@ -50,7 +36,7 @@ class Products extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%products}}';
+        return '{{%recipes}}';
     }
 
     /**
@@ -60,7 +46,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['updated_at', 'created_at'], 'integer'],
-            [['product_name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -71,7 +57,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_name' => 'Product Name',
+            'name' => 'Name',
             'updated_at' => 'Updated At',
             'created_at' => 'Created At',
         ];
