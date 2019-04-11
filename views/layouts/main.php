@@ -35,11 +35,22 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            !Yii::$app->user->isGuest ? (['label' => 'Home', 'url' => ['/site/index']]) : (''),
-
+            [
+                'label' => 'Home',
+                'url' => ['/site/index'],
+                'visible' => !Yii::$app->user->isGuest
+            ],
+            [
+                'label' => 'Users',
+                'url' => ['/user/index'],
+                'visible' => !Yii::$app->user->isGuest
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
