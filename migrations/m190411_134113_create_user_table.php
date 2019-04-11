@@ -19,6 +19,7 @@ class m190411_134113_create_user_table extends Migration
             'email' => $this->string(255),
             'access_token' => $this->string(255),
             'forgotten_password_token' => $this->string(255),
+            'is_active' => $this->boolean(),
             'updated_at' => $this->integer(),
             'created_at' => $this->integer()
 
