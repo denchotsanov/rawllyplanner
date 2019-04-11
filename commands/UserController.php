@@ -7,8 +7,9 @@
 
 namespace app\commands;
 
+use Yii;
+use app\models\User;
 use yii\console\Controller;
-use yii\console\ExitCode;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -18,17 +19,28 @@ use yii\console\ExitCode;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class HelloController extends Controller
+class UserController extends Controller
 {
     /**
      * This command echoes what you have entered as the message.
      * @param string $message the message to be echoed.
      * @return int Exit code
      */
-    public function actionIndex($message = 'hello world')
+    public function actionIndex($email, $username, $password)
     {
-        echo $message . "\n";
+        $model = new User();
+        $model->scenario = 'create';
+        $model->username = $username;
+        $model->email = $email;
+        $model->password = $password;
+        $model->is_active = User::IS_ACTIVE_TRUE;
 
-        return ExitCode::OK;
+        if ($model->validate()) {
+            $model->save();
+            $this->stdout('User has been created' . "!\n", 4);
+        } else {
+            $this->stdout(json_encode($model->getErrors()) . "\n", 3);
+        }
     }
+
 }
