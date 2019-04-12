@@ -132,4 +132,8 @@ class Order extends \yii\db\ActiveRecord
         }
         return parent::afterFind();
     }
+
+    public function getDeliveryPrice(){
+        return $this->product->getDeliveryPrice();
+    }
 }

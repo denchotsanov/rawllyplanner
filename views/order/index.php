@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Order;
+use app\models\Products;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -24,23 +26,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'product_id',
-            'text',
             'name',
             'phone',
-            //'address:ntext',
-            //'description:ntext',
-            //'status',
-            //'quantity',
-            //'price',
-            //'ready_to',
-            //'delivered',
-            //'updated_at',
-            //'created_at',
-
+            'address:ntext',
+            [
+                'attribute' => 'status',
+                'value' => function ($data) {
+                    return Order::$statuses[$data->status];
+                }],
+            [
+                'attribute' => 'product_id',
+                'value' => function ($data) {
+                    return Products::getNameByID($data->product_id);
+                }],
+            'quantity',
+            [
+                'label' => 'Delivery price',
+                'value' => function ($data) {
+                    return $data->deliveryPrice;
+                }],
+            'price',
+            'ready_to:datetime',
+            'delivered:datetime',
+            'created_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

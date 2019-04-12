@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Order;
+use app\models\Units;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -36,7 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'address:ntext',
             'description:ntext',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($data) {
+                    return Order::$statuses[$data->status];
+                }],
             'quantity',
             'price',
             'ready_to:datetime',
