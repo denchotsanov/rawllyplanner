@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Units;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -46,10 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             ['label' => 'Materials','filter' => false,'attribute'=>'materials_id','value'=>function($data){ return \app\models\Materials::getByID($data->materials_id)->name; }],
-            'quantity',
-            ['label' => 'Unit','filter' => false,'attribute'=>'unit_id','value'=>function($data){ return \app\models\Units::getByID($data->unit_id)->name; }],
-
-            ['class' => 'yii\grid\ActionColumn'],
+            ['label' => 'Unit',
+                'filter' => false,
+                'attribute'=>'unit_id',
+                'value'=>function($data){
+                    return $data->quantity.' '. Units::getByID($data->unit_id)->name;
+                }
+            ],
+            ['class' => 'yii\grid\ActionColumn','template' => '{update}{delete}'],
         ],
     ]); ?>
 </div>
