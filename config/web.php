@@ -49,6 +49,13 @@ $config = [
                 'logout'=>'site/logout'
             ],
         ],
+        'formatter' => [
+            'locale' => 'bg',
+            'dateFormat' => 'dd.MM.yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'BGN',
+        ],
     ],
     'params' => $params,
 ];
