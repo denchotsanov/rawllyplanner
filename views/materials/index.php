@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Units;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -26,8 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-
-            ['label' => 'Unit','filter' => false,'attribute'=>'unit_id','value'=>function($data){ return \app\models\Units::getByID($data->unit_id)->name; }],
+            [
+                'label' => 'Unit',
+                'filter' => false,
+                'attribute' => 'unit_id',
+                'value' => function ($data) {
+                    return '1 '. Units::getNameByID($data->unit_id);
+            }],
             'delivery_price:currency',
 
             ['class' => 'yii\grid\ActionColumn'],

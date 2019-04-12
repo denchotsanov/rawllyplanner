@@ -32,30 +32,52 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'product_name',
+            ['label' => 'Delivery price',
+                'filter' => false,
+                'attribute' => 'id',
+                'format' => 'currency',
+                'value' => function ($data) {
+                    return $data->deliveryPrice;
+                }
+            ],
             'updated_at:datetime',
             'created_at:datetime',
         ],
     ]) ?>
-<div class="row">
-    <p>
-        <?= Html::a('Add Material', ['recipes/create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProviderRecipe,
-        'filterModel' => $searchModelRecipe,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <div class="row">
+        <p>
+            <?= Html::a('Add Material', ['recipes/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        </p>
+        <?= GridView::widget([
+            'dataProvider' => $dataProviderRecipe,
+            'filterModel' => $searchModelRecipe,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-            ['label' => 'Materials','filter' => false,'attribute'=>'materials_id','value'=>function($data){ return \app\models\Materials::getByID($data->materials_id)->name; }],
-            ['label' => 'Unit',
-                'filter' => false,
-                'attribute'=>'unit_id',
-                'value'=>function($data){
-                    return $data->quantity.' '. Units::getByID($data->unit_id)->name;
-                }
+                ['label' => 'Materials', 'filter' => false, 'attribute' => 'materials_id', 'value' => function ($data) {
+                    return \app\models\Materials::getByID($data->materials_id)->name;
+                }],
+                ['label' => 'Unit',
+                    'filter' => false,
+                    'attribute' => 'unit_id',
+                    'value' => function ($data) {
+                        return $data->quantity . ' ' . Units::getByID($data->unit_id)->name;
+                    }
+                ],
+                ['label' => 'price',
+                    'filter' => false,
+                    'attribute' => 'unit_id',
+                    'format' => 'currency',
+                    'value' => function ($data) {
+                        return $data->totalPrice;
+                    }
+                ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{update}{delete}',
+                    'controller' => 'recipes'
+                ],
             ],
-            ['class' => 'yii\grid\ActionColumn','template' => '{update}{delete}'],
-        ],
-    ]); ?>
-</div>
+        ]); ?>
+    </div>
 </div>

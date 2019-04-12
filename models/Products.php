@@ -19,14 +19,25 @@ class Products extends \yii\db\ActiveRecord
 
     public static function getList()
     {
-        return ArrayHelper::map( self::find()->all(),'id','product_name');
+        return ArrayHelper::map(self::find()->all(), 'id', 'product_name');
     }
-    public static function getByID($id=null){
-        if(!$id){
+
+    public static function getByID($id = null)
+    {
+        if (!$id) {
             return false;
         }
 
         return self::findOne($id);
+    }
+
+    public static function getNameByID($id = null)
+    {
+        if (!$id) {
+            return false;
+        }
+
+        return self::findOne($id)->product_name;
     }
 
     /**
@@ -75,5 +86,23 @@ class Products extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'created_at' => 'Created At',
         ];
+    }
+
+    public function getRecipe(){
+        return $this->hasMany(RecipesRelation::className(),['product_id'=>'id']);
+    }
+
+    public function getDeliveryPrice(){
+        if($this->recipe){
+            $price = 0;
+                foreach($this->recipe as $material){
+                    if($material->totalPrice){
+                        $price += $material->totalPrice;
+                    }
+            }
+
+            return $price;
+        }
+        return null;
     }
 }

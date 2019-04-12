@@ -78,4 +78,12 @@ class RecipesRelation extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Units::className(), ['id' => 'unit_id']);
     }
+
+    public function getTotalPrice(){
+        if($this->unit_id == $this->materials->unit_id){
+            return $this->quantity * $this->materials->delivery_price;
+        }
+
+        return null;
+    }
 }

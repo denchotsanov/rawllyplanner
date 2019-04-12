@@ -70,7 +70,6 @@ class Materials extends \yii\db\ActiveRecord
         ];
     }
 
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -90,5 +89,12 @@ class Materials extends \yii\db\ActiveRecord
         }
 
         return self::findOne($id);
+    }
+    public static function getNameByID($id=null){
+        if(!$id){
+            return false;
+        }
+
+        return self::findOne($id)->name;
     }
 }

@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'product_id')->dropDownList(Products::getList()) ?>
+    <?= $form->field($model, 'product_id')->dropDownList(Products::getList(),['disabled' => true]) ?>
 
     <?= $form->field($model, 'materials_id')->dropDownList(Materials::getList()) ?>
 

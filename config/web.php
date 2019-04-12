@@ -52,6 +52,7 @@ $config = [
         'formatter' => [
             'locale' => 'bg',
             'dateFormat' => 'dd.MM.yyyy',
+            'datetimeFormat' => 'dd MMMM yyyy HH:mm',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'BGN',

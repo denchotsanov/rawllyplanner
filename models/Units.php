@@ -68,6 +68,13 @@ class Units extends \yii\db\ActiveRecord
     {
         return ArrayHelper::map( self::find()->all(),'id','name');
     }
+    public static function getNameByID($id=null){
+        if(!$id){
+            return false;
+        }
+
+        return self::findOne($id)->name;
+    }
     public static function getByID($id=null){
         if(!$id){
             return false;

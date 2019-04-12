@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ProductsSearch */
+/* @var $searchModel app\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="products-index">
+<div class="order-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,15 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'product_name',
-            ['label' => 'Delivery price',
-                'filter' => false,
-                'attribute' => 'id',
-                'format' => 'currency',
-                'value' => function ($data) {
-                    return $data->deliveryPrice;
-                }
-            ],
+
+            'id',
+            'product_id',
+            'text',
+            'name',
+            'phone',
+            //'address:ntext',
+            //'description:ntext',
+            //'status',
+            //'quantity',
+            //'price',
+            //'ready_to',
+            //'delivered',
+            //'updated_at',
+            //'created_at',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
