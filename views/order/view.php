@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Order::$statuses[$data->status];
                 }],
             'quantity',
-            'price',
+            'price:currency',
             'ready_to:datetime',
             'delivered:datetime',
             'updated_at:datetime',

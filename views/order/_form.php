@@ -44,18 +44,30 @@ use yii\widgets\ActiveForm;
 
         <div class="col-sm-6 col-xs-12">
             <h3>Contact</h3>
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-xs-6">
+                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                </div>
+                <div class="col-xs-6">
+                    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
             <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
-
-
         </div>
         <div class="col-sm-6 col-xs-12">
             <h3>Product</h3>
             <?= $form->field($model, 'product_id')->dropDownList(Products::getList()) ?>
             <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'quantity')->textInput() ?>
-            <?= $form->field($model, 'price')->textInput() ?>
+            <div class="row">
+                <div class="col-xs-6">
+                    <?= $form->field($model, 'quantity')->textInput() ?>
+                </div>
+                <div class="col-xs-6">
+                    <?= $form->field($model, 'price')->textInput() ?>
+                </div>
+            </div>
+
+
         </div>
 
         <div class="col-sm-12 col-xs-12">

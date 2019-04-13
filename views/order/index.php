@@ -43,10 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'quantity',
             [
                 'label' => 'Delivery price',
+                'format' => 'currency',
                 'value' => function ($data) {
                     return $data->deliveryPrice;
                 }],
-            'price',
+            'price:currency',
             'ready_to:datetime',
             'delivered:datetime',
             'created_at:datetime',
