@@ -52,6 +52,7 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
         </div>
         <div class="col-sm-6 col-xs-12">

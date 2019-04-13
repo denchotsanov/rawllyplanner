@@ -13,6 +13,7 @@ use yii\db\ActiveRecord;
  * @property string $text
  * @property string $name
  * @property string $phone
+ * @property string $email
  * @property string $address
  * @property string $description
  * @property int $status
@@ -71,7 +72,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             [['product_id', 'status', 'quantity',  'updated_at', 'created_at'], 'integer'],
             [['ready_to', 'delivered'],'safe'],
-            [['address', 'description'], 'string'],
+            [['address', 'description','email'], 'string'],
             [['price'], 'number'],
             [['status'],'in','range' => [self::REJECT,self::CREATE,self::IN_PROGRESS,self::READY, self::DELIVERED]],
             [['text'], 'string', 'max' => 150],
@@ -92,6 +93,7 @@ class Order extends \yii\db\ActiveRecord
             'product_id' => 'Product',
             'text' => 'Additional Text',
             'name' => 'Name',
+            'email' => 'Email',
             'phone' => 'Phone',
             'address' => 'Address',
             'description' => 'Description',
@@ -114,10 +116,10 @@ class Order extends \yii\db\ActiveRecord
     }
 
     public function beforeValidate(){
-            $this->ready_to = strtotime($this->ready_to);
+            $this->ready_to = Yii::$app->formatter->asTimestamp($this->ready_to);
 
             if($this->delivered!=''){
-                $this->delivered = strtotime($this->delivered);
+                $this->delivered = Yii::$app->formatter->asTimestamp($this->delivered);
             }
 
         return parent::beforeValidate();
@@ -125,15 +127,19 @@ class Order extends \yii\db\ActiveRecord
 
     public function afterFind(){
         if($this->delivered){
-            $this->delivered = date('d.m.Y H:i',$this->delivered);
+
+            $this->delivered = Yii::$app->formatter->asDatetime($this->delivered);
         }
         if($this->ready_to){
-            $this->ready_to= date('d.m.Y H:i',$this->ready_to);
+            $this->ready_to= Yii::$app->formatter->asDatetime($this->ready_to);
         }
         return parent::afterFind();
     }
 
     public function getDeliveryPrice(){
+        if(!$this->product){
+            return null;
+        }
         return $this->product->getDeliveryPrice();
     }
 }

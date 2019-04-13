@@ -11,6 +11,9 @@ use app\models\Order;
  */
 class OrderSearch extends Order
 {
+    public $statusRange=null;
+    public $readyDate=null;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +21,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'product_id', 'status', 'quantity',  'updated_at', 'created_at'], 'integer'],
-            [['text', 'name', 'phone', 'address','ready_to', 'delivered', 'description'], 'safe'],
+            [['text', 'name', 'phone', 'address','ready_to', 'delivered', 'description','statusRange','readyDate'], 'safe'],
             [['price'], 'number'],
         ];
     }
@@ -74,6 +77,10 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'description', $this->description]);
 
+        if($this->readyDate || $this->statusRange){
+            $query->andFilterWhere(['in','status',$this->statusRange])
+                ->andFilterWhere(['between', 'ready_to', strtotime(date('d.m.Y 00:00',$this->readyDate)), strtotime(date('d.m.Y 23:59',$this->readyDate))]);
+        }
         return $dataProvider;
     }
 }

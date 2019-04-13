@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Order;
+use app\models\OrderSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +63,27 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $searchModelOrder = new OrderSearch();
+        $searchModelOrder->statusRange = [Order::CREATE,Order::READY,Order::IN_PROGRESS] ;
+        $searchModelOrder->readyDate = time() ;
+        $dataProviderOrder = $searchModelOrder->search(Yii::$app->request->queryParams);
+
+        $dataProviderOrder->setSort([
+            'attributes' => [
+                'ready_to' => [
+                    'asc' => ['ready_to' => SORT_ASC],
+                    'desc' => ['ready_to' => SORT_DESC],
+                    'default' => SORT_ASC,
+                ],
+            ],
+            'defaultOrder' => [
+                'ready_to' => SORT_ASC
+            ]
+        ]);
+        return $this->render('index',[
+            'dataProviderOrder' => $dataProviderOrder,
+            'searchModelOrder' => $searchModelOrder,]);
     }
 
     /**
