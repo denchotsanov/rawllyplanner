@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Units;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'unit_id')->dropDownList( Units::getList()) ?>
+    <?= $form->field($model, 'unit_id')->widget(Select2::className(),['data'=> Units::getList()]) ?>
 
     <?= $form->field($model, 'delivery_price')->textInput() ?>
 

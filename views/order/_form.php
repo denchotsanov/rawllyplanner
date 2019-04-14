@@ -3,6 +3,7 @@
 use app\models\Order;
 use app\models\Products;
 use kartik\datetime\DateTimePicker;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-sm-12">
-            <?= $form->field($model, 'status')->dropDownList(Order::$statuses) ?>
+            <?= $form->field($model, 'status')->widget(Select2::className(),['data'=>Order::$statuses]) ?>
             <?= $form->field($model, 'ready_to')->widget(DateTimePicker::classname(), [
                 'options' => [
                     'placeholder' => 'Enter date & time'
@@ -57,7 +58,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-sm-6 col-xs-12">
             <h3>Product</h3>
-            <?= $form->field($model, 'product_id')->dropDownList(Products::getList()) ?>
+            <?= $form->field($model, 'product_id')->widget(Select2::className(),['data'=>Products::getList()]) ?>
             <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
             <div class="row">
                 <div class="col-xs-6">
