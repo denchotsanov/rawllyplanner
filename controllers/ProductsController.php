@@ -2,17 +2,19 @@
 
 namespace app\controllers;
 
+use app\models\RecipesSearch;
 use Yii;
-use app\models\User;
-use app\models\UserSearch;
+use app\models\Products;
+use app\models\ProductsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * ProductsController implements the CRUD actions for Products model.
  */
-class UserController extends Controller
+class ProductsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -20,6 +22,18 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','update','view','delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','update','view','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -30,12 +44,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Products models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,27 +59,33 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Products model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+        $searchModelRecipe = new RecipesSearch();
+        $searchModelRecipe->product_id = $id;
+        $dataProviderRecipe = $searchModelRecipe->search(Yii::$app->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderRecipe' => $dataProviderRecipe,
+            'searchModelRecipe' => $searchModelRecipe,
+
         ]);
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Products model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
-        $model->scenario = 'create';
+        $model = new Products();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -76,7 +96,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Products model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -85,7 +105,7 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'update';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -96,7 +116,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Products model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +130,15 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Products the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Products::findOne($id)) !== null) {
             return $model;
         }
 

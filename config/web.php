@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'name'=>'RawllyERP',
+    'language'=>'bg',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -48,6 +49,26 @@ $config = [
                 'logout'=>'site/logout'
             ],
         ],
+        'formatter' => [
+            'locale' => 'bg',
+            'dateFormat' => 'dd.MM.yyyy',
+            'defaultTimeZone'=>'Europe/Sofia',
+            'timeZone'=>'Europe/Sofia',
+            'datetimeFormat' => 'dd.MM.yyyy HH:mm',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'BGN',
+        ],
+    ],
+    'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+            // enter optional module parameters below - only if you need to
+            // use your own export download action or custom translation
+            // message source
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
+        ]
     ],
     'params' => $params,
 ];

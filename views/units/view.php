@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model app\models\Units */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Units', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="user-view">
+<div class="units-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,11 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'username',
-            'email:email',
-            'access_token',
-            'forgotten_password_token',
-            'is_active',
+            'id',
+            'name',
             'updated_at:datetime',
             'created_at:datetime',
         ],

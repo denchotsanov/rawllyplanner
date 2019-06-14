@@ -1,6 +1,7 @@
 <?php
 
 use app\models\User;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -14,12 +15,12 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-
+    <?php if($model->scenario == 'create'): ?>
+        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <?php endif; ?>
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_active')->dropDownList(User::$activeStatuses);?>
+    <?= $form->field($model, 'is_active')->widget(Select2::className(),['data'=>User::$activeStatuses]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
