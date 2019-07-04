@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -60,17 +61,29 @@ AppAsset::register($this);
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Units',
-                'url' => ['/units/index'],
-                'visible' => !Yii::$app->user->isGuest
+                'label' => 'Other',
+                'visible' => !Yii::$app->user->isGuest,
+                'items' => [
+                    [
+                        'label' => 'Units',
+                        'url' => ['/units/index'],
+                        'visible' => !Yii::$app->user->isGuest
+                    ],
+                    [
+                        'label' => 'Nutritional Value',
+                        'url' => ['/nutrition-value/index'],
+                        'visible' => !Yii::$app->user->isGuest
+                    ],
+                ]
             ],
+
             [
                 'label' => 'Users',
                 'url' => ['/user/index'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -97,7 +110,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy;  2013 - <?= date('Y') ?> All rights reserved. <a href="https://tsanov.eu/" target="_blank">tsanov.eu</a></p>
+        <p class="pull-left">&copy; 2013 - <?= date('Y') ?> All rights reserved. <a href="https://tsanov.eu/"
+                                                                                    target="_blank">tsanov.eu</a></p>
         <p class="pull-right"> Ver. <?= Yii::$app->version; ?></p>
     </div>
 </footer>
