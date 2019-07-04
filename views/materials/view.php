@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <p>
-            <?= Html::a('Add NV', ['recipes/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Add NV', ['nutrition-value-relation/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         </p>
         <?= GridView::widget([
             'dataProvider' => $dataProviderNVR,
