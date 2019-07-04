@@ -102,12 +102,63 @@ class OrderController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionToday()
+    {
+        $searchModelOrder = new OrderSearch();
+        $searchModelOrder->statusRange = [Order::CREATE, Order::READY, Order::IN_PROGRESS];
+        $searchModelOrder->readyDate = time();
+        $dataProviderOrder = $searchModelOrder->search(Yii::$app->request->queryParams);
+
+        $dataProviderOrder->setSort([
+            'attributes' => [
+                'ready_to' => [
+                    'asc' => ['ready_to' => SORT_ASC],
+                    'desc' => ['ready_to' => SORT_DESC],
+                    'default' => SORT_ASC,
+                ],
+            ],
+            'defaultOrder' => [
+                'ready_to' => SORT_ASC
+            ]
+        ]);
+        return $this->render('today', [
+            'dataProviderOrder' => $dataProviderOrder,
+            'searchModelOrder' => $searchModelOrder,
+        ]);
+    }
+
+    public function actionCooking(){
+        $searchModelOrder = new OrderSearch();
+        $searchModelOrder->statusRange = [Order::CREATE, Order::READY, Order::IN_PROGRESS];
+        $searchModelOrder->readyDate = time();
+        $dataProviderOrder = $searchModelOrder->search(Yii::$app->request->queryParams);
+
+        $dataProviderOrder->setSort([
+            'attributes' => [
+                'ready_to' => [
+                    'asc' => ['ready_to' => SORT_ASC],
+                    'desc' => ['ready_to' => SORT_DESC],
+                    'default' => SORT_ASC,
+                ],
+            ],
+            'defaultOrder' => [
+                'ready_to' => SORT_ASC
+            ]
+        ]);
+        return $this->render('cooking', [
+            'dataProviderOrder' => $dataProviderOrder,
+            'searchModelOrder' => $searchModelOrder,
+        ]);
     }
 
     /**
