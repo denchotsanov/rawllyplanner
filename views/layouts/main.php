@@ -36,8 +36,6 @@ AppAsset::register($this);
         ],
     ]);
 
-
-
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
@@ -99,8 +97,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <a href="https://tsanov.eu/" target="_blank">tsanov.eu</a> <?= date('Y') ?></p>
-        <p class="pull-right"></p>
+        <p class="pull-left">&copy; <a href="https://tsanov.eu/" target="_blank">tsanov.eu</a>  2013 - <?= date('Y') ?> All rights reserved.</p>
+        <p class="pull-right"> Ver. <?= Yii::$app->version; ?></p>
     </div>
 </footer>
 
