@@ -54,32 +54,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModelNVR,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
                 [
-                    'label' => 'Materials',
+                    'label' => 'realation',
                     'filter' => false,
-                    'attribute' => 'materials_id',
+                    'attribute' => 'nutrition_value_id',
                     'value' => function ($data) {
-                        return \app\models\Materials::getByID($data->materials_id)->name;
+                        return \app\models\NutritionValue::getByID($data->nutrition_value_id)->name;
                     }
                 ],
                 [
                     'label' => 'Unit',
                     'filter' => false,
-                    'attribute' => 'unit_id',
+                    'attribute' => 'value',
                     'value' => function ($data) {
-                        return $data->quantity . ' ' . Units::getByID($data->unit_id)->name;
+                        return $data->value . ' ';
                     }
                 ],
-                [
-                    'label' => 'price',
-                    'filter' => false,
-                    'attribute' => 'unit_id',
-                    'format' => 'currency',
-                    'value' => function ($data) {
-                        return $data->totalPrice;
-                    }
-                ],
+
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{update}{delete}',

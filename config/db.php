@@ -5,9 +5,9 @@ return [
 //    'dsn' => 'mysql:host=localhost;dbname=rawllybg_calc',
 //    'username' => 'rawllybg_calc',
 //    'password' => 'p{*}?z.K*13C',
-    'dsn'=>'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'testuser',
-    'password' => 'testuser',
+    'dsn'=>'mysql:host=localhost;dbname=rawlly',
+    'username' => 'root',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
