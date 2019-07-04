@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\NutritionValue;
+use app\models\NutritionValueRelation;
+use app\models\RecipesSearch;
 use Yii;
 use app\models\Materials;
 use app\models\MaterialsSearch;
@@ -65,8 +68,13 @@ class MaterialsController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelNVR = new NutritionValueRelation();
+        $searchModelNVR->product_id = $id;
+        $dataProviderNVR= $searchModelNVR->search(Yii::$app->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderNVR' => $dataProviderNVR,
+            'searchModelNVR' => $searchModelNVR,
         ]);
     }
 

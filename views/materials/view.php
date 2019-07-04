@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Units;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -31,11 +33,59 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            ['attribute'=>'unit_id','value'=>function($data){ return \app\models\Units::getByID($data->unit_id)->name; }],
+            [
+                'attribute' => 'unit_id',
+                'value' => function ($data) {
+                    return \app\models\Units::getByID($data->unit_id)->name;
+                }
+            ],
             'delivery_price:currency',
             'updated_at:datetime',
             'created_at:datetime',
         ],
     ]) ?>
 
+    <div class="row">
+        <p>
+            <?= Html::a('Add NV', ['recipes/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        </p>
+        <?= GridView::widget([
+            'dataProvider' => $dataProviderNVR,
+            'filterModel' => $searchModelNVR,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+
+                [
+                    'label' => 'Materials',
+                    'filter' => false,
+                    'attribute' => 'materials_id',
+                    'value' => function ($data) {
+                        return \app\models\Materials::getByID($data->materials_id)->name;
+                    }
+                ],
+                [
+                    'label' => 'Unit',
+                    'filter' => false,
+                    'attribute' => 'unit_id',
+                    'value' => function ($data) {
+                        return $data->quantity . ' ' . Units::getByID($data->unit_id)->name;
+                    }
+                ],
+                [
+                    'label' => 'price',
+                    'filter' => false,
+                    'attribute' => 'unit_id',
+                    'format' => 'currency',
+                    'value' => function ($data) {
+                        return $data->totalPrice;
+                    }
+                ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{update}{delete}',
+                    'controller' => 'recipes'
+                ],
+            ],
+        ]); ?>
+    </div>
 </div>
