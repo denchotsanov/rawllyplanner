@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'name'=>'RawllyERP',
+    'version'=>'0.2',
     'language'=>'bg',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -29,7 +30,6 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
