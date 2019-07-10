@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\RecipesRelation;
 use Yii;
 use app\models\NutritionValueRelation;
 use app\models\NutritionValueRelationSearch;
@@ -62,12 +63,16 @@ class NutritionValueRelationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new NutritionValueRelation();
 
+        if($id){
+            $model->product_id = $id;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['materials/view', 'id' => $model->product_id]);
         }
 
         return $this->render('create', [
@@ -87,7 +92,8 @@ class NutritionValueRelationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['materials/view', 'id' => $model->product_id]);
+
         }
 
         return $this->render('update', [
@@ -101,6 +107,8 @@ class NutritionValueRelationController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
