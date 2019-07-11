@@ -32,7 +32,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -909,12 +909,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "903f669b8e2a43246c2eba2537e0b07001381bee"
+                "reference": "c50e7dd928530422508ed675873c076a80b959d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/903f669b8e2a43246c2eba2537e0b07001381bee",
-                "reference": "903f669b8e2a43246c2eba2537e0b07001381bee",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/c50e7dd928530422508ed675873c076a80b959d2",
+                "reference": "c50e7dd928530422508ed675873c076a80b959d2",
                 "shasum": ""
             },
             "require": {
@@ -953,7 +953,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2019-05-25T07:29:45+00:00"
+            "time": "2019-07-05T06:24:22+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-affix",
@@ -2273,12 +2273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "d4eab49815017e2dfbfb835ad77bb20989b4afca"
+                "reference": "de3f948b27dfa26faa225db191b89d6c3eb0c963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/d4eab49815017e2dfbfb835ad77bb20989b4afca",
-                "reference": "d4eab49815017e2dfbfb835ad77bb20989b4afca",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/de3f948b27dfa26faa225db191b89d6c3eb0c963",
+                "reference": "de3f948b27dfa26faa225db191b89d6c3eb0c963",
                 "shasum": ""
             },
             "require": {
@@ -2359,7 +2359,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2019-07-03T16:34:11+00:00"
+            "time": "2019-07-10T20:41:28+00:00"
         },
         {
             "name": "psr/log",
@@ -2820,12 +2820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "75b795c7c9b959bd99abddfa0f657f6565f97d3a"
+                "reference": "f61cfa2ab22ddf82377f5c3428066689123b50e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/75b795c7c9b959bd99abddfa0f657f6565f97d3a",
-                "reference": "75b795c7c9b959bd99abddfa0f657f6565f97d3a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f61cfa2ab22ddf82377f5c3428066689123b50e5",
+                "reference": "f61cfa2ab22ddf82377f5c3428066689123b50e5",
                 "shasum": ""
             },
             "require": {
@@ -2912,7 +2912,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2019-07-02T20:29:09+00:00"
+            "time": "2019-07-10T18:16:39+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
