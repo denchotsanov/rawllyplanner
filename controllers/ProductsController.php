@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\NutritionValueRelation;
+use app\models\NutritionValueRelationSearch;
 use app\models\RecipesSearch;
 use Yii;
 use app\models\Products;
@@ -69,11 +71,17 @@ class ProductsController extends Controller
         $searchModelRecipe = new RecipesSearch();
         $searchModelRecipe->product_id = $id;
         $dataProviderRecipe = $searchModelRecipe->search(Yii::$app->request->queryParams);
+
+        $searchModelNV = new NutritionValueRelationSearch();
+        $searchModelNV->product_id =$id;
+        $dataProviderNV = $searchModelNV->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'dataProviderRecipe' => $dataProviderRecipe,
             'searchModelRecipe' => $searchModelRecipe,
-
+            'searchModelNV' => $searchModelNV,
+            'dataProviderNV' => $dataProviderNV,
         ]);
     }
 

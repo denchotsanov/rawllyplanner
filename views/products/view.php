@@ -32,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'product_name',
-            ['label' => 'Delivery price',
+            [
+                'label' => 'Delivery price',
                 'filter' => false,
                 'attribute' => 'id',
                 'format' => 'currency',
@@ -54,28 +55,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                ['label' => 'Materials', 'filter' => false, 'attribute' => 'materials_id', 'value' => function ($data) {
-                    return \app\models\Materials::getByID($data->materials_id)->name;
-                }],
-                ['label' => 'Unit',
+                [
+                    'label' => 'Materials',
+                    'filter' => false,
+                    'attribute' => 'materials_id',
+                    'value' => function ($data) {
+                        return \app\models\Materials::getByID($data->materials_id)->name;
+                    }
+                ],
+                [
+                    'label' => 'Unit',
                     'filter' => false,
                     'attribute' => 'unit_id',
                     'value' => function ($data) {
                         return $data->quantity . ' ' . Units::getByID($data->unit_id)->name;
                     }
                 ],
-                ['label' => 'price',
+                [
+                    'label' => 'price',
                     'filter' => false,
                     'attribute' => 'unit_id',
                     'format' => 'currency',
                     'value' => function ($data) {
                         return $data->totalPrice;
                     }
-                ],
-                [
-                    'class' => 'yii\grid\ActionColumn',
-                    'template' => '{update}{delete}',
-                    'controller' => 'recipes'
                 ],
             ],
         ]); ?>
