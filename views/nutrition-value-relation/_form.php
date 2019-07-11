@@ -16,7 +16,8 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'product_id')->dropDownList(Materials::getList(),['disabled' => true]) ?>
-  <?= $form->field($model, 'nutrition_value_id')->widget(Select2::className(),['data'=>\app\models\NutritionValue::getList()]); ?>
+
+    <?= $form->field($model, 'nutrition_value_id')->widget(Select2::className(),['data'=>\app\models\NutritionValue::getList()]); ?>
     <?= $form->field($model, 'value')->textInput() ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>

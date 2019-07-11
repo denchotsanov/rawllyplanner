@@ -53,9 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProviderNVR,
             'filterModel' => $searchModelNVR,
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
                 [
-                    'label' => 'realation',
+                    'label' => 'Name',
                     'filter' => false,
                     'attribute' => 'nutrition_value_id',
                     'value' => function ($data) {
@@ -63,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 [
-                    'label' => 'Unit',
+                    'label' => 'Value',
                     'filter' => false,
                     'attribute' => 'value',
                     'value' => function ($data) {
@@ -74,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{update}{delete}',
-                    'controller' => 'recipes'
+                    'controller' => 'nutrition-value-relation'
                 ],
             ],
         ]); ?>

@@ -42,9 +42,9 @@ class NutritionValueRelation extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nutrition_value_id' => 'Nutrition Value ID',
-            'product_id' => 'Product ID',
-            'value' => 'Value',
+            'nutrition_value_id' => 'Name',
+            'product_id' => 'Product',
+            'value' => 'Value for 1 unit',
             'description' => 'Description',
         ];
     }
