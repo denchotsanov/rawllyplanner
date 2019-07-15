@@ -89,29 +89,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
     </div>
     <div class="row">
-        <?php var_dump($model->getNutriProduct());
-        exit; ?>
-        <?= GridView::widget([
+        <?=
+        GridView::widget([
             'dataProvider' => $dataProviderNV,
             'filterModel' => $searchModelNV,
             'columns' => [
-                [
-                    'label' => 'Name',
-                    'filter' => false,
-                    'attribute' => 'nutrition_value_id',
-                    'value' => function ($data) {
-                        return \app\models\NutritionValue::getByID($data->nutrition_value_id)->name;
-                    }
-                ],
-                [
-                    'label' => 'Value',
-                    'filter' => false,
-                    'attribute' => 'value',
-                    'value' => function ($data) {
-                        return $data->value . ' ';
-                    }
-                ],
-            ],
+
+            ]
         ]); ?>
     </div>
 </div>

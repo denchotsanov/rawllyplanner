@@ -52,8 +52,8 @@ class NutritionValueRelation extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct(){
-        return $this->hasOne(Products::class,['id'=>'product_id']);
+    public function getMaterial(){
+        return $this->hasOne(Materials::class,['id'=>'product_id']);
     }
 
     /**

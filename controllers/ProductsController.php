@@ -2,8 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\NutritionValueRelation;
-use app\models\NutritionValueRelationSearch;
+use app\models\RecipesNutritionValueSearch;
 use app\models\RecipesSearch;
 use Yii;
 use app\models\Products;
@@ -72,8 +71,9 @@ class ProductsController extends Controller
         $searchModelRecipe->product_id = $id;
         $dataProviderRecipe = $searchModelRecipe->search(Yii::$app->request->queryParams);
 
-        $searchModelNV = new NutritionValueRelationSearch();
-        $searchModelNV->product_id =$id;
+        $searchModelNV = new RecipesNutritionValueSearch();
+        $searchModelNV->material_id[] = $id;
+
         $dataProviderNV = $searchModelNV->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [
@@ -129,6 +129,8 @@ class ProductsController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

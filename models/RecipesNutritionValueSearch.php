@@ -1,21 +1,16 @@
 <?php
 
+
 namespace app\models;
+
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\NutritionValueRelation;
+use yii\db\Query;
 
-/**
- * NutritionValueRelationSearch represents the model behind the search form of `app\models\NutritionValueRelation`.
- */
-class NutritionValueRelationSearch extends NutritionValueRelation
+class RecipesNutritionValueSearch extends NutritionValueRelation
 {
-
     public $material_id =[];
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -25,35 +20,28 @@ class NutritionValueRelationSearch extends NutritionValueRelation
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
-
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
+    public function attributeLabels()
+    {
+        return [
+            'nvname' => 'Name',
+            'nvquantity' => 'Value for 1 unit',
+        ];
+    }
     public function search($params)
     {
-        $query = NutritionValueRelation::find();
-//        (new Query())
-//            ->select("user.id,user.username,user.created_at,GROUP_CONCAT(auth_assignment.item_name ORDER BY auth_assignment.item_name SEPARATOR ',') as roles")
-//            ->from('user')
-//
-//            ->join('LEFT OUTER JOIN','auth_assignment','auth_assignment.user_id = user.id')
-//
-//            ->join('INNER JOIN','auth_item',' auth_item.name = auth_assignment.item_name AND auth_item.TYPE = 1')
-//
-//            ->groupBy('user.id,user.username,user.created_at');
-        $query->joinWith('material m',true);
+        $query =(new Query())
+            ->select("nvname, (sum( nvvalue )) as nvquantity")
+            ->from((new Query())
+                ->select("r.quantity as quan, m.name, nv.name AS nvname, (r.quantity * nvr.value) AS nvvalue")
+                ->from('recipes_relation r')
+                ->join('JOIN','materials m','r.materials_id = m.id')
+                ->join('JOIN','nutrition_value_relation nvr','m.id = nvr.product_id')
+                ->join('JOIN','nutrition_value nv','nv.id = nvr.nutrition_value_id')
+            )->groupBy('nvname');
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
