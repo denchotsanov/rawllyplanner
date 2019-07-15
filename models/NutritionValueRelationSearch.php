@@ -44,16 +44,6 @@ class NutritionValueRelationSearch extends NutritionValueRelation
     public function search($params)
     {
         $query = NutritionValueRelation::find();
-//        (new Query())
-//            ->select("user.id,user.username,user.created_at,GROUP_CONCAT(auth_assignment.item_name ORDER BY auth_assignment.item_name SEPARATOR ',') as roles")
-//            ->from('user')
-//
-//            ->join('LEFT OUTER JOIN','auth_assignment','auth_assignment.user_id = user.id')
-//
-//            ->join('INNER JOIN','auth_item',' auth_item.name = auth_assignment.item_name AND auth_item.TYPE = 1')
-//
-//            ->groupBy('user.id,user.username,user.created_at');
-        $query->joinWith('material m',true);
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
@@ -77,8 +67,6 @@ class NutritionValueRelationSearch extends NutritionValueRelation
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description]);
-        $query->andWhere(['in','m.id',$this->material_id]);
-
         return $dataProvider;
     }
 }

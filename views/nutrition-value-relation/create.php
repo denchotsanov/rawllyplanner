@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\NutritionValueRelation */
 
 $this->title = 'Create Nutrition Value Relation';
-$this->params['breadcrumbs'][] = ['label' => 'Nutrition Value Relations', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Materials', 'url' => ['materials/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nutrition-value-relation-create">
