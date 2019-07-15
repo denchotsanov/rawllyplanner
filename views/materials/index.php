@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return '1 '. Units::getNameByID($data->unit_id);
             }],
             'delivery_price:currency',
-
+            'updated_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
