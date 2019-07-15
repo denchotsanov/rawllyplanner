@@ -16,7 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'name',
-            'updated_at:datetime',
+            [
+                'attribute' => 'updated_at',
+                'filter' => false,
+                'format' => 'datetime'
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
