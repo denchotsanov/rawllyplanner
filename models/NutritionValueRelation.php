@@ -15,6 +15,7 @@ use Yii;
  */
 class NutritionValueRelation extends \yii\db\ActiveRecord
 {
+    public $valuePerOne;
     /**
      * {@inheritdoc}
      */
@@ -44,7 +45,7 @@ class NutritionValueRelation extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nutrition_value_id' => 'Name',
             'product_id' => 'Product',
-            'value' => 'Value for 1 unit',
+            'value' => 'Value valid for 100 g',
             'description' => 'Description',
         ];
     }
@@ -61,5 +62,24 @@ class NutritionValueRelation extends \yii\db\ActiveRecord
      */
     public function getNutritionValue(){
         return $this->hasOne(NutritionValue::class,['id'=>'nutrition_value_id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->value = $this->value / 100;
+        return parent::beforeSave($insert);
+    }
+
+    public function afterFind() {
+
+        parent::afterFind();
+
+        $this->valuePerOne = $this->value;
+        $this->value = $this->value * 100;
+
+    }
+
+    public function getValueOnSto(){
+        return $this->valuePerOne * 100;
     }
 }

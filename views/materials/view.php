@@ -49,9 +49,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
             <?= Html::a('Add NV', ['nutrition-value-relation/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         </p>
+        <p>
+            Values valid for 100 g
+        </p>
         <?= GridView::widget([
             'dataProvider' => $dataProviderNVR,
-            'filterModel' => $searchModelNVR,
+
             'columns' => [
                 [
                     'label' => 'Name',
@@ -66,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filter' => false,
                     'attribute' => 'value',
                     'value' => function ($data) {
-                        return $data->value . ' ';
+                        return $data->valueOnSto . ' ';
                     }
                 ],
 

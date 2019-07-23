@@ -28,15 +28,15 @@ class RecipesNutritionValueSearch extends NutritionValueRelation
     {
         return [
             'nvname' => 'Name',
-            'nvquantity' => 'Value for 1 unit',
+            'nvquantity' => 'Value valid 100 g',
         ];
     }
     public function search($params)
     {
         $query =(new Query())
-            ->select("nvname, (sum( nvvalue )) as nvquantity")
+            ->select("nvname,  ROUND(sum( nvvalue ))  as nvquantity")
             ->from((new Query())
-                ->select("r.quantity as quan, m.name, nv.name AS nvname, (r.quantity * nvr.value) AS nvvalue")
+                ->select("r.quantity as quan, m.name, nv.name AS nvname, (r.quantity * (nvr.value * 1000)) AS nvvalue")
                 ->from('recipes_relation r')
                 ->join('JOIN','materials m','r.materials_id = m.id')
                 ->join('JOIN','nutrition_value_relation nvr','m.id = nvr.product_id')
