@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Units */
+/* @var $model app\models\NutritionValueRelation */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Units', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Nutrition Value Relations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="units-view">
+<div class="nutrition-value-relation-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,9 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'name',
-            'updated_at:datetime',
-            'created_at:datetime',
+            'id',
+            'nutrition_value_id',
+            'product_id',
+            'value',
+            'description:ntext',
         ],
     ]) ?>
 

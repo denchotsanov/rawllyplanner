@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Order;
-use app\models\OrderSearch;
+use app\models\NutritionValue;
+use app\models\NutritionValueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OrderController implements the CRUD actions for Order model.
+ * NutritionValueController implements the CRUD actions for NutritionValue model.
  */
-class OrderController extends Controller
+class NutritionValueController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class OrderController extends Controller
     }
 
     /**
-     * Lists all Order models.
+     * Lists all NutritionValue models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
+        $searchModel = new NutritionValueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Displays a single Order model.
+     * Displays a single NutritionValue model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,15 @@ class OrderController extends Controller
     }
 
     /**
-     * Creates a new Order model.
+     * Creates a new NutritionValue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Order();
-        $model->status = Order::CREATE;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model = new NutritionValue();
 
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -77,7 +76,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Updates an existing Order model.
+     * Updates an existing NutritionValue model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,13 +96,11 @@ class OrderController extends Controller
     }
 
     /**
-     * Deletes an existing Order model.
+     * Deletes an existing NutritionValue model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -112,65 +109,16 @@ class OrderController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionToday()
-    {
-        $searchModelOrder = new OrderSearch();
-        $searchModelOrder->statusRange = [Order::CREATE, Order::READY, Order::IN_PROGRESS];
-        $searchModelOrder->readyDate = time();
-        $dataProviderOrder = $searchModelOrder->search(Yii::$app->request->queryParams);
-
-        $dataProviderOrder->setSort([
-            'attributes' => [
-                'ready_to' => [
-                    'asc' => ['ready_to' => SORT_ASC],
-                    'desc' => ['ready_to' => SORT_DESC],
-                    'default' => SORT_ASC,
-                ],
-            ],
-            'defaultOrder' => [
-                'ready_to' => SORT_ASC
-            ]
-        ]);
-        return $this->render('today', [
-            'dataProviderOrder' => $dataProviderOrder,
-            'searchModelOrder' => $searchModelOrder,
-        ]);
-    }
-
-    public function actionCooking(){
-        $searchModelOrder = new OrderSearch();
-        $searchModelOrder->statusRange = [Order::CREATE, Order::READY, Order::IN_PROGRESS];
-        $searchModelOrder->readyDate = time();
-        $dataProviderOrder = $searchModelOrder->search(Yii::$app->request->queryParams);
-
-        $dataProviderOrder->setSort([
-            'attributes' => [
-                'ready_to' => [
-                    'asc' => ['ready_to' => SORT_ASC],
-                    'desc' => ['ready_to' => SORT_DESC],
-                    'default' => SORT_ASC,
-                ],
-            ],
-            'defaultOrder' => [
-                'ready_to' => SORT_ASC
-            ]
-        ]);
-        return $this->render('cooking', [
-            'dataProviderOrder' => $dataProviderOrder,
-            'searchModelOrder' => $searchModelOrder,
-        ]);
-    }
-
     /**
-     * Finds the Order model based on its primary key value.
+     * Finds the NutritionValue model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Order the loaded model
+     * @return NutritionValue the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Order::findOne($id)) !== null) {
+        if (($model = NutritionValue::findOne($id)) !== null) {
             return $model;
         }
 

@@ -34,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->deliveryPrice;
                 }
             ],
+            [
+                'attribute' => 'updated_at',
+                'filter' => false,
+                'format' => 'datetime'
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

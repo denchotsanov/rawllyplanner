@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UnitsSearch */
+/* @var $model app\models\NutritionValueSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="units-search">
+<div class="nutrition-value-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,9 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'updated_at') ?>
-
-    <?= $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'description') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
