@@ -90,20 +90,20 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product',
-            'text' => 'Additional Text',
-            'name' => 'Name',
+            'product_id' => 'Продукт',
+            'text' => 'Допълнителна информация',
+            'name' => 'Име',
             'email' => 'Email',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'description' => 'Description',
-            'status' => 'Status',
-            'quantity' => 'Quantity',
-            'price' => 'Price',
-            'ready_to' => 'Ready To',
-            'delivered' => 'Delivered',
-            'updated_at' => 'Updated At',
-            'created_at' => 'Created At',
+            'phone' => 'Телефон',
+            'address' => 'Адрес',
+            'description' => 'Описание',
+            'status' => 'Статус',
+            'quantity' => 'Количество',
+            'price' => 'Цена',
+            'ready_to' => 'Дата за доставка',
+            'delivered' => 'Доставено на',
+            'updated_at' => 'Обновено на',
+            'created_at' => 'Създадено на',
         ];
     }
 

@@ -12,6 +12,6 @@ $this->title = Yii::$app->name;
 ?>
 <div class="site-index">
     <div class="row">
-        <a href="<?php echo Url::to(['order/create']) ?>" class="btn btn-default btn-lg">New Order</a>
+        <a href="<?php echo Url::to(['order/create']) ?>" class="btn btn-default btn-lg">Нова поръчка</a>
     </div>
 </div>

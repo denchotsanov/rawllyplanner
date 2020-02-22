@@ -10,21 +10,16 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Orders';
+$this->title = 'Поръчки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Today Order', ['today'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Cooking Order', ['cooking'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Нова поръчка', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Поръчки за днес', ['today'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Поръчки за готвене', ['cooking'], ['class' => 'btn btn-warning']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -45,19 +40,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 }],
             'quantity',
             [
-                'label' => 'Delivery price',
+                'label' => 'Доставна цена',
                 'format' => 'currency',
                 'value' => function ($data) {
                     return $data->deliveryPrice;
                 }],
             'price:currency',
-            'ready_to:datetime',
-            'delivered:datetime',
+            [
+                'attribute' => 'ready_to',
+                'format' => 'datetime',
+                'filter' => false
+            ],
+            [
+                'attribute' => 'delivered',
+                'format' => 'datetime',
+                'filter' => false
+            ],
             'created_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-
-
 </div>

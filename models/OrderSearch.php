@@ -78,7 +78,8 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'description', $this->description]);
 
         if($this->readyDate || $this->statusRange){
-            $query->andFilterWhere(['in','status',$this->statusRange])
+            $query
+                ->andFilterWhere(['in','status',$this->statusRange])
                 ->andFilterWhere(['between', 'ready_to', strtotime(date('d.m.Y 00:00',$this->readyDate)), strtotime(date('d.m.Y 23:59',$this->readyDate))]);
         }
         return $dataProvider;
