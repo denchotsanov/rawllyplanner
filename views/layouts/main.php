@@ -41,36 +41,36 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             [
-                'label' => 'Home',
+                'label' => 'Начало',
                 'url' => ['/site/index'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Orders',
+                'label' => 'Поръчки',
                 'url' => ['/order/index'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Products',
+                'label' => 'Продукти',
                 'url' => ['/products/index'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Materials',
+                'label' => 'Материали',
                 'url' => ['/materials/index'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Other',
+                'label' => 'Други',
                 'visible' => !Yii::$app->user->isGuest,
                 'items' => [
                     [
-                        'label' => 'Units',
+                        'label' => 'Единици',
                         'url' => ['/units/index'],
                         'visible' => !Yii::$app->user->isGuest
                     ],
                     [
-                        'label' => 'Nutritional Value',
+                        'label' => 'Енергийни стройности' ,
                         'url' => ['/nutrition-value/index'],
                         'visible' => !Yii::$app->user->isGuest
                     ],
@@ -78,17 +78,17 @@ AppAsset::register($this);
             ],
 
             [
-                'label' => 'Users',
+                'label' => 'Потребители',
                 'url' => ['/user/index'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Вход', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Изход (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
